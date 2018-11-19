@@ -1,4 +1,6 @@
 
+// 19.11.2018 - JASM - REST Server genérico.
+
 import Server from './classes/server';
 import { SERVER_PORT } from './global/enviroment';
 import router from './routes/router';
