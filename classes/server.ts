@@ -5,6 +5,7 @@ import socketIO from 'socket.io';
 import http from 'http';
 
 import * as socket from '../sockets/socket';
+import { obtenerUsuarios } from '../sockets/socket';
 
 
 export default class Server {
@@ -40,16 +41,19 @@ export default class Server {
         this.io.on( 'connection', cliente => {
 
             // Conectar cliente
-            socket.conectarCliente( cliente );
+            socket.conectarCliente( cliente, this.io );
 
             // Configurar usuario
             socket.cfgUsuario( cliente, this.io );
+
+            // Obtener usuarios activos
+            socket.obtenerUsuarios( cliente, this.io );
 
             // Mensajes
             socket.mensaje( cliente, this.io );
 
             // Desconexión
-            socket.desconectar(cliente);
+            socket.desconectar(cliente, this.io );
 
         } )
     }
